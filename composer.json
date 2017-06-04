@@ -1,0 +1,25 @@
+{
+  "name": "alixsperoza/frash-install",
+  "description": "CMS made with Frash - PHP 7 Framework",
+  "keywords": [ "CMS", "Frash", "Framework", "MVC" ],
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "require": {
+    "alixsperoza/frash": "1.4.*",
+    "alixsperoza/frash-cms": "0.1.*"
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "Frash\\Console\\Framework\\LaunchCmdComposer::work",
+      "FrashCms\\Console\\LaunchInstallCms::work"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Bundles\\": "Bundles/",
+      "Configuration\\": "Configuration/",
+      "Traductions\\": "Traductions/",
+      "Storage\\": "Storage/"
+    }
+  }
+}
