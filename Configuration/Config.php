@@ -37,7 +37,12 @@ class Config{
 					'format' => 'continu'
 				]
 			],
-			'install' => 'no'
+			'install' => 'no',
+			'title' => '',
+			'format' => [
+				'article' => '',
+				'forum' => ''
+			]
 		];
 	}
 }
