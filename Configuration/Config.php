@@ -8,9 +8,7 @@ class Config{
 			'stock_route' => 'yes',
 			'racine' => 'home',
 			'cache' => [
-				'memcached' => [
-					'localhost' => '11211'
-				],
+				'memcached' => [],
 				'tpl' => 'yes'
 			],
 			'traduction' => [
