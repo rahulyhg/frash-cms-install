@@ -32,7 +32,8 @@ class Config{
 			        'activ' => 'yes',
 			        'format' => 'continu'
 			    ]
-			]
+			],
+			'install' => 'no'
 		];
 	}
 }
