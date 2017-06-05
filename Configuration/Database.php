@@ -9,7 +9,7 @@ class Database{
 				'username' => '',
 				'password' => '',
 				'dbname' => '',
-				'system' => 'MySQL',
+				'system' => '',
 				'port' => ''
 			]
 		];
