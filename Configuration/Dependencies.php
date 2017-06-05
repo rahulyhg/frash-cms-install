@@ -15,7 +15,7 @@ class Dependencies{
 			'response' => 'Frash\Framework\Request\Response',
 			'service' => 'Frash\Framework\Request\Service',
 			'session' => 'Frash\Framework\Request\Session\Session',
-			'trad' => 'Frash\Framework\Controller\TraductionFactory',
+			'trad' => 'Frash\Framework\Controller\Traduction',
 			'tpl' => 'Frash\Framework\Controller\Templating'
 		];
 	}
