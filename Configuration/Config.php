@@ -4,7 +4,7 @@ namespace Configuration;
 class Config{
 	public static function define(){
 		return [
-			'env' => 'local',
+			'env' => 'prod',
 			'stock_route' => 'yes',
 			'racine' => 'home',
 			'inspecter' => [
