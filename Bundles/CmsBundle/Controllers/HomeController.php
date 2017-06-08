@@ -1,6 +1,5 @@
 <?php
 namespace Bundles\CmsBundle\Controllers;
-use Configuration\Database as DatabaseConfig;
 use Frash\Framework\Controller\BaseController;
 use Frash\Framework\Request\Request;
 use FrashCms\Install\{ Config, Database, Routing };
