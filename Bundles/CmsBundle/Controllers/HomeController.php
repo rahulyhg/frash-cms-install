@@ -3,7 +3,6 @@ namespace Bundles\CmsBundle\Controllers;
 use Configuration\Database as DatabaseConfig;
 use Frash\Framework\Controller\BaseController;
 use Frash\Framework\Request\Request;
-use Frash\ORM\Orm;
 use FrashCms\Install\{ Config, Database, Routing };
 
 class HomeController extends BaseController
