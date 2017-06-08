@@ -24,13 +24,9 @@
                                 <label for="title_install">{{ trad title_project }}</label>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s6">{{ $form.format_url }}</div>
-                        </div>
+                        <div class="row"><div class="input-field col s6">{{ $form.format_url }}</div></div>
                         <div class="row"><h5>{{ trad database }}</h5></div>
-                        <div class="row">
-                            <div class="input-field col s6">{{ $form.system }}</div>
-                        </div>
+                        <div class="row"><div class="input-field col s6">{{ $form.system }}</div></div>
                         <div class="row">
                             <div class="input-field col s3">
                                 {{ $form.host }}
@@ -51,6 +47,12 @@
                                 <label for="password_database">{{ trad password }}</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                {{ $form.database }}
+                                <label for="name_database">{{ trad name_database }}</label>
+                            </div>
+                        </div>
                         <div class="row"><h5>{{ trad admin_account }}</h5></div>
                         <div class="row">
                             <div class="input-field col s3">
@@ -62,11 +64,13 @@
                                 <label for="password_database">{{ trad password }}</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Installer<i class="material-icons right">send</i></button>
+                        </div>
                     {{ $form.end }}
                 </div>
             </div>
         </div>
-        <footer></footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>

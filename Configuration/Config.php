@@ -6,11 +6,11 @@ class Config{
 		return [
 			'env' => 'prod',
 			'stock_route' => 'yes',
-			'racine' => 'home',
 			'inspecter' => [
-				'activ' => 'no',
-				'request' => 'no',
+			    'activ' => 'no',
+			    'request' => 'no',
 			],
+			'racine' => 'home',
 			'cache' => [
 				'memcached' => [],
 				'tpl' => 'yes'
@@ -20,22 +20,22 @@ class Config{
 				'available' => [ 'fr', 'en' ]
 			],
 			'log' => [
-				'access' => [
-					'activ' => 'yes',
-					'format' => 'continu'
-				],
-				'ajax' => [
-					'activ' => 'yes',
-					'format' => 'continu'
-				],
-				'error' => [
-					'activ' => 'yes',
-					'format' => 'continu'
-				],
-				'request' => [
-					'activ' => 'yes',
-					'format' => 'continu'
-				]
+			    'access' => [
+			        'activ' => 'yes',
+			        'format' => 'continu'
+			    ],
+			    'ajax' => [
+			        'activ' => 'yes',
+			        'format' => 'continu'
+			    ],
+			    'error' => [
+			        'activ' => 'yes',
+			        'format' => 'continu'
+			    ],
+			    'request' => [
+			        'activ' => 'yes',
+			        'format' => 'continu'
+			    ]
 			],
 			'install' => 'no',
 			'title' => '',
