@@ -20,7 +20,9 @@
                     {{ else }}
                         <ul id="nav-mobile" class="left hide-on-med-and-down">
                             <li><a href="{{ route deconnexion }}">Déconnexion</a></li>
-                            {{ if $user == "yes" }}{{ end_if }}
+                            {{ if $user == "yes" }}
+                                <li><a href="{{ route administration }}">Administration</a></li>
+                            {{ end_if }}
                         </ul>
                     {{ end_if }}
                     {{ $form.start }}

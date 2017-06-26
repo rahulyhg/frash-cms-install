@@ -7,6 +7,10 @@ class Routing extends Router
 	public function __construct()
 	{
 		$this->group([ 'bundle' => 'CmsBundle' ], function(){
+		    $this->group([ 'middleware' => 'isAdmin' ], function(){
+		        $this->get('administration', 'AdminController:adminAction');
+            });
+
 			$this->get('article', 'ArticleController:articleAction');
 			$this->get('deconnexion', 'HomeController:deconnexionAction');
 			$this->get('home', 'HomeController:homeAction');

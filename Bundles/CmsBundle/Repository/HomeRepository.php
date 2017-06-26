@@ -8,9 +8,9 @@ class HomeRepository extends QueryBuilder
     public function updConnexion($user)
     {
         $upd = new Update('user');
-        $upd->update([ 'connexion' => date('d/m/Y à H:i:s') ])
+        $upd->update([ 'connexion' => ':date' ])
             ->where('id', ':id')
-            ->execute([ $user ]);
+            ->execute([ date('d/m/Y à H:i:s'), $user ]);
         $this->update($upd);
     }
 }

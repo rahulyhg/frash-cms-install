@@ -55,4 +55,10 @@ class HomeController extends BaseController
 			return $this->redirect->route('home')->go();
 		}
 	}
+
+	public function deconnexionAction()
+    {
+        $this->session->unsetAll();
+        $this->redirect->route('home')->go();
+    }
 }

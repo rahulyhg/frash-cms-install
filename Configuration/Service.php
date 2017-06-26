@@ -4,7 +4,9 @@ namespace Configuration;
 class Service{
 	public static function define(){
 		return [
-			'middleware' => [],
+			'middleware' => [
+			    'isAdmin' => 'CmsBundle@IsAdmin'
+            ],
 			'service' => [],
 			'templating' => [
                 'filter' => [],
