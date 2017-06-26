@@ -8,7 +8,12 @@ class Config{
 			'stock_route' => 'yes',
 			'inspecter' => [
 			    'activ' => 'no',
-			    'request' => 'no',
+			    'request' => [
+                    'select' => 'no',
+                    'update' => 'no',
+                    'insert' => 'no',
+                    'delete' => 'no'
+                ]
 			],
 			'racine' => 'home',
 			'cache' => [

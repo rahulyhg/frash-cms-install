@@ -8,10 +8,14 @@ class Routing extends Router
 	{
 		$this->group([ 'bundle' => 'CmsBundle' ], function(){
 			$this->get('article', 'ArticleController:articleAction');
+			$this->get('deconnexion', 'HomeController:deconnexionAction');
 			$this->get('home', 'HomeController:homeAction');
 
-			$this->get('install', 'HomeController:installAction');
-			$this->post('final_install', 'HomeController:installFinalAction');
+			$this->post('connexion', 'HomeController:connexionAction');
+			$this->post('inscription', 'HomeController:inscriptionAction');
+
+			$this->get('install', 'InstallController:installAction');
+			$this->post('final_install', 'InstallController:installFinalAction');
 		});
 	}
 }

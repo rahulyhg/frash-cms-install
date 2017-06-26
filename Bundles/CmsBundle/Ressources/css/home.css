@@ -1,8 +1,13 @@
 .title_page_install{
 	font-size:1.4em;
 	margin-left:4%;
+	margin-right:10px;
 }
 
 .body{
 	margin-top:20px;
+}
+
+#form_connexion, #form_inscription{
+	margin-top:40px;
 }

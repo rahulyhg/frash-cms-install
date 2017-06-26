@@ -13,7 +13,7 @@ class Dependencies{
 			'redirect' => 'Frash\Framework\Request\Redirect',
 			'request' => 'Frash\Framework\Request\Request',
 			'response' => 'Frash\Framework\Request\Response',
-			'service' => 'Frash\Framework\Request\Service',
+			'service' => 'Frash\Framework\Request\Service\Service',
 			'session' => 'Frash\Framework\Request\Session\Session',
 			'trad' => 'Frash\Framework\Controller\Traduction',
 			'tpl' => 'Frash\Framework\Controller\Templating'

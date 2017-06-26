@@ -1,65 +1,58 @@
 <?php
 namespace Bundles\CmsBundle\Controllers;
+use Bundles\CmsBundle\Repository\HomeRepository;
 use Frash\Framework\Controller\BaseController;
-use Frash\Framework\Request\Request;
-use FrashCms\Install\{ Config, Database, Routing };
+use Frash\ORM\Query\{ Counter, Finder };
 
 class HomeController extends BaseController
 {
-	public function homeAction()
+	public function homeAction(Finder $finder)
 	{
-		return $this->tpl->view('home.tpl');
-	}
-
-	public function installAction()
-	{
-		return $this->tpl->view('install.tpl', [
+		return $this->tpl->view('home.tpl', [
+			'user' => ($this->session->has('cms_user_id')) ? $finder->findOne('user', $this->session->get('cms_user_id'))->admin : 'no_connected',
+			'title' => $this->dic->config['title'],
 			'form' => [
-				'start' => $this->form->create->init([ 'method' => 'POST', 'action' => 'final_install', 'csrf' => 'yes', 'class' => 'col s12' ]),
-            	'title' => $this->form->create->text([ 'name' => 'title', 'require' => true, 'id' => 'title_install', 'class' => 'validate' ]),
-            	'system' => $this->form->create->select([ [ 'name' => 'system', 'select' => 'default' ], [ 'default' => [ 'value' => 'Système de base de données', 'disabled' => true ], 'MySQL' => 'MySQL' ] ]),
-            	'host' => $this->form->create->text([ 'name' => 'host', 'require' => true, 'id' => 'host_database', 'class' => 'validate', 'value' => 'localhost' ]),
-            	'port' => $this->form->create->number([ 'name' => 'port', 'id' => 'port_database' ]),
-            	'user_bdd' => $this->form->create->text([ 'name' => 'user_bdd', 'require' => true, 'id' => 'user_database', 'class' => 'validate' ]),
-            	'password_bdd' => $this->form->create->password([ 'name' => 'password_bdd', 'id' => 'password_database' ]),
-            	'database' => $this->form->create->text([ 'name' => 'database', 'id' => 'name_database', 'require' => true, 'class' => 'validate' ]),
-            	'pseudo' => $this->form->create->text([ 'name' => 'pseudo', 'require' => true, 'id' => 'pseudo', 'class' => 'validate' ]),
-            	'password' => $this->form->create->password([ 'name' => 'password', 'require' => true, 'id' => 'password', 'class' => 'validate' ]),
-            	'format_url' => $this->form->create->select([
-            		[ 'name' => 'format_url', 'require' => true, 'id' => 'format_url', 'select' => 'default' ],
-            		[
-            			'default' => [ 'value' => 'Format de l\'URL des articles', 'disabled' => true ],
-            			'1' => 'YY/MM/DD/titre-article',
-            			'2' => 'YYYY/MM/DD/titre-article',
-            			'3' => 'DD/MM/YYYY/titre-article',
-            			'4' => 'YYYY-MM-DD-titre-article',
-            			'5' => 'ID de l\'article'
-            		]
-            	]),
-            	'submit' => $this->form->create->submit([ 'name' => 'submit', 'value' => 'Installer', 'class' => 'btn btn-default' ]),
-            	'end' => '</form>'
+				'start' => $this->form->create->init([ 'method' => 'POST', 'action' => 'search', 'csrf' => 'yes', 'csrf_name' => 'search', 'class' => 'right' ]),
+				'search' => $this->form->create->search([ 'name' => 'search', 'require' => true, 'id' => 'search' ]),
+				'end' => '</form>'
+			],
+			'form_connexion' => [
+				'start' => $this->form->create->init([ 'method' => 'POST', 'action' => 'connexion', 'csrf' => 'yes', 'csrf_name' => 'connexion', 'id' => 'form_connexion' ]),
+				'pseudo' => $this->form->create->text([ 'name' => 'pseudo', 'require' => true, 'id' => 'pseudo_connexion' ]),
+				'password' => $this->form->create->password([ 'name' => 'password', 'require' => true, 'id' => 'password_connexion' ]),
+				'submit' => $this->form->create->submit([ 'name' => 'submit', 'value' => 'Connexion', 'class' => 'btn' ]),
+				'end' => '</form>'
+			],
+			'form_inscription' => [
+				'start' => $this->form->create->init([ 'method' => 'POST', 'action' => 'inscription', 'csrf' => 'yes', 'csrf_name' => 'inscription', 'id' => 'form_inscription' ]),
+				'pseudo' => $this->form->create->text([ 'name' => 'pseudo', 'require' => true, 'id' => 'pseudo_inscription' ]),
+				'password' => $this->form->create->password([ 'name' => 'password', 'require' => true, 'id' => 'password_inscription' ]),
+				'check_password' => $this->form->create->password([ 'name' => 'check_password', 'require' => true, 'id' => 'check_password_inscription' ]),
+				'mail' => $this->form->create->email([ 'name' => 'mail', 'require' => true, 'id' => 'mail_inscription' ]),
+				'submit' => $this->form->create->submit([ 'name' => 'submit', 'value' => 'Inscription', 'class' => 'btn' ]),
+				'end' => '</form>'
 			]
 		]);
 	}
 
-	public function installFinalAction(Request $request)
+	public function connexionAction(HomeRepository $req, Counter $counter, Finder $finder)
 	{
-		$post = $request->post();
-		
-		Config::install($post->title, $post->format_url, $this->dic->config);
-		Database::install($post->system, $post->host, $post->database, $post->port, $post->user_bdd, $post->password_bdd);
-		Routing::install($post->format_url);
+		$post = $this->form->post;
 
-		$pdo = null;
+		if($this->form->verif->csrf($post->connexion, 'connexion')){
+			if(!$this->form->verif->maxLength($post->pseudo, 40)){ return $this->redirect->route('home')->go(); }
+			if(!$this->form->verif->minLength($post->pseudo, 3)){ return $this->redirect->route('home')->go(); }
+			if(empty($post->password)){ return $this->redirect->route('home')->go(); }
+            if($counter->countByPseudoAndPassword('user', $post->pseudo, sha1($post->password)) != 1){ return $this->redirect->route('home')->go(); }
 
-		if($post->system == 'MySQL'){
-			$pdo = new \PDO('mysql:host='.$post->host.';dbname='. $post->database.';charset=UTF8;', $post->user_bdd, $post->password_bdd, []);
+            $id = $finder->findOneByPseudoAndPassword('user', $post->pseudo, sha1($post->password))->id;
+            $req->updConnexion($id);
+
+            $this->session->set('cms_user_id', $id);
+
+            return $this->redirect->route('home')->go();
+		} else {
+			return $this->redirect->route('home')->go();
 		}
-		
-		Database::installTables($pdo);
-		$id_admin = Database::insertAdmin($pdo, $post->pseudo, $post->password);
-
-		$this->session->set('id', $id_admin);
-		return $this->tpl->view('install_final.tpl', [ 'title' => $post->title ]);
 	}
 }
