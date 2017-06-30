@@ -15,7 +15,6 @@ class Config{
                     'delete' => 'no'
                 ]
 			],
-			'racine' => 'home',
 			'cache' => [
 				'memcached' => [],
 				'tpl' => 'yes'
