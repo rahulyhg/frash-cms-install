@@ -13,7 +13,7 @@ class Routing extends Router
 
 			$this->get('article', 'ArticleController:articleAction');
 			$this->get('deconnexion', 'HomeController:deconnexionAction');
-			$this->get('home', 'HomeController:homeAction');
+			$this->get('home', 'HomeController:homeAction', [ 'default' => true ]);
 
 			$this->post('connexion', 'HomeController:connexionAction');
 			$this->post('inscription', 'HomeController:inscriptionAction');

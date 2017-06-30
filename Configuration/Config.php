@@ -9,11 +9,11 @@ class Config{
 			'inspecter' => [
 			    'activ' => 'no',
 			    'request' => [
-                    'select' => 'no',
-                    'update' => 'no',
-                    'insert' => 'no',
-                    'delete' => 'no'
-                ]
+			        'select' => 'no',
+			        'update' => 'no',
+			        'insert' => 'no',
+			        'delete' => 'no'
+			    ]
 			],
 			'cache' => [
 				'memcached' => [],
@@ -44,7 +44,7 @@ class Config{
 			'install' => 'no',
 			'title' => '',
 			'format' => [
-				'article' => '',
+				'article' => 0,
 				'forum' => ''
 			]
 		];
